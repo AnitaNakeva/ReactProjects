@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React Basics</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 25px;
+      }
+      .authButtons {
+        background-color: rgb(25, 56, 135);
+        padding: 15px 20px;
+        border-radius: 5px;
+        border-width: 0;
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        margin-right: 10px;
+        margin-top: 15px;
+        cursor: pointer;
+      }
+
+      .passButton {
+        width: 50px;
+        height: 25px;
+      }
+
+      .inputBoxes {
+        display:flex;
+        flex-direction: column;
+      }
+
+      .inputBox {
+        padding: 10px;
+        margin-top: 7px;
+        margin-bottom: 7px;
+        border-width: 1.7px;
+        border-radius: 5px;
+        width: 250px;
+      }
+
+      .passDiv {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+    function App() {
+        
+        const [showPassword, setShowPassword] = React.useState(true);
+
+        function toogleButton(){
+            setShowPassword(!showPassword);
+        }
+
+        return (
+            <>
+            <p>Hello, Welcome to my website!</p>
+            <div className="inputBoxes">
+                <input className="inputBox" placeholder="Email"></input>
+                <div className="passDiv">
+                <input className="inputBox" placeholder="Password" type={showPassword ? "text" : "password"}></input>
+                <button className="passButton" onClick={toogleButton}>{showPassword ? "Hide" : "Show"}</button>
+                </div>
+            </div>
+            <div>
+                <button className="authButtons">Login</button>
+                <button className="authButtons">Sign up</button>
+            </div>
+            </>
+        )
+      }
+
+      const container = document.querySelector('.js-container');
+      ReactDOM.createRoot(container).render(<App />);
+    </script>
+  </body>
+</html>
