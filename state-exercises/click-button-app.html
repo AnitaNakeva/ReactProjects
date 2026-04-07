@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React Basics</title>
+    <style>
+        body {
+            margin: 0px 0px;
+        }
+
+        button {
+            background-color: rgb(25, 135, 84);
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            border-width: 0;
+            margin-right: 10px;
+            padding: 10px 15px;
+        }
+
+        .buttonsDiv {
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            align-items: center;
+            background-color: rgb(222, 222, 222);
+        }
+
+    </style>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+    function App() {
+        const [times, setTimes] = React.useState(0);
+        const buttonRef = React.useRef(null);
+
+        let intervalId = null;
+
+        function toggleButton() {
+            setTimes(prev => prev + 1);
+        }
+
+        function resetButton() {
+            setTimes(0);
+        }
+
+        function startAutoClick() {
+            setInterval(() => {
+                buttonRef.current.click();
+            }, 1000);
+        }
+
+        return (
+            <div className="buttonsDiv">
+                <button ref={buttonRef} onClick={toggleButton}>
+                    Clicked {times} {times === 1 ? "time" : "times"}
+                </button>
+                <button onClick={resetButton}>Reset</button>
+                <button onClick={startAutoClick}>Auto Click</button>
+            </div>
+        );
+        }
+
+      const container = document.querySelector('.js-container');
+      ReactDOM.createRoot(container).render(<App />);
+    </script>
+  </body>
+</html>
